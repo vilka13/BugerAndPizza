@@ -2,7 +2,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.809.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PizzaBurgerOOP", "PizzaBurgerOOP.csproj", "{155BE56C-400E-4885-A704-BDB80CE68D8B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PBoop", "PBoop.csproj", "{155BE56C-400E-4885-A704-BDB80CE68D8B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
