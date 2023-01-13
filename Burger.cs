@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace Restauracja_FasbiersPizza
@@ -13,14 +13,26 @@ namespace Restauracja_FasbiersPizza
 
         }
 
+        public List<BurgerKinds> RemoveBurgerKinds(string pt, decimal price)
+        {
+            BurgerKinds burgerKinds = new BurgerKinds();
+
+          
+            burgerKinds.KindsName = pt;
+            burgerKinds.KindsPrice = price;
+            
+            burgerKindsList.Remove(burgerKinds);
+
+            return burgerKindsList;
+        }
         public List<BurgerKinds> AddBurgerKinds(string pt, decimal price)
         {
             BurgerKinds burgerKinds = new BurgerKinds();
 
-            //assign the burger topping variables
+            
             burgerKinds.KindsName = pt;
             burgerKinds.KindsPrice = price;
-            //return burger topping
+            
             burgerKindsList.Add(burgerKinds);
 
             return burgerKindsList;
@@ -45,3 +57,4 @@ namespace Restauracja_FasbiersPizza
 
     }
 }
+
