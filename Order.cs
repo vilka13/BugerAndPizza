@@ -1,4 +1,4 @@
-﻿
+
     using System;
 using System.Collections.Generic;
 using System.Diagnostics.Tracing;
@@ -64,7 +64,7 @@ namespace Restauracja_FasbiersPizza
             this.MyDrinks.Add(drinks);
         }
         //
-
+       
 
         //--------------Pizzas---------------------
         public void ShowPizzaOrder()
@@ -89,9 +89,31 @@ namespace Restauracja_FasbiersPizza
 
 
         }
+        public void ShowPizzasOrder()
+        {
+
+            if (MyPizzas.Count > 0)
+            {
+                // Console.WriteLine($"My Pizza Order:");
+                for (int i = 0; i < MyPizzas.Count; i++)
+                {
+                    Console.WriteLine($"Pizzas: {i + 1}                |                    |");
+                    
+                    foreach (PizzaKinds p in MyPizzas[i].pizzaKindsList)
+                    {
+                        Console.WriteLine($"\t{p.KindsName}|                    | {p.KindsPrice} $ ");
+                   
+
+                    }
+                  
+                }
+            }
+
+
+        }
         public Order BuildPizzaOrder(Order order, int choice, Pizza pizza)
         {
-            Console.WriteLine("\nChoose your Pizza Toppings");
+            Console.WriteLine("\nWybierz dodatki do pizzy");
             MenuItems.CreateMenu(MenuItems.PizzaKindsMenuItems.pizzaKindsMenuItemsList);
             pizza = MenuItems.PizzaKindsMenuItems.ChoosePizzaKinds(choice, pizza);
             order.AddToPizzaOrder(pizza);
@@ -124,9 +146,33 @@ namespace Restauracja_FasbiersPizza
                 }
             }
         }
+        public void ShowBurgersOrder()
+        {
+            if (MyBurgers.Count > 0)
+            {
+                for (int i = 0; i < MyBurgers.Count; i++)
+                {
+                    Console.WriteLine($"Burgers: {i + 1}               |                    |");
+
+                  
+
+                    foreach (BurgerKinds p in MyBurgers[i].burgerKindsList)
+                    {
+
+
+                        Console.WriteLine($"\t{p.KindsName}  |                    | {p.KindsPrice} $ ");
+
+                     
+
+                    }
+         
+
+                }
+            }
+        }
         public Order BuildBurgerOrder(Order order, int choice, Burger burger)
         {
-            Console.WriteLine("\nChoose your Burger Toppings");
+            Console.WriteLine("\nWybierz dodatki do Burgera");
             MenuItems.CreateMenu(MenuItems.BurgerKindsMenuItems.burgerKindsMenuItemsList);
             burger = MenuItems.BurgerKindsMenuItems.ChooseBurgerKinds(choice, burger);
             order.AddToBurgerOrder(burger);
@@ -138,8 +184,8 @@ namespace Restauracja_FasbiersPizza
         {
             if (MyDrinks.Count > 0)
             {
-                Console.WriteLine($"Extra Items: {MyDrinks.Count}           |                    |");
-                CheckTxt($"Extra Items: {MyDrinks.Count}           |                    |");
+                Console.WriteLine($"Drinks Items: {MyDrinks.Count}           |                    |");
+                CheckTxt($"Drinks Items: {MyDrinks.Count}           |                    |");
                 for (int i = 0; i < Drinks.drinksItemsList.Count; i++)
                 {
                     Console.WriteLine($"\t{Drinks.drinksItemsList[i].drinksItemName}        |  {Drinks.drinksItemsList[i].drinksItemSize}  | {Drinks.drinksItemsList[i].drinksItemSizePrice} $");
@@ -147,6 +193,21 @@ namespace Restauracja_FasbiersPizza
                     CheckTxt($"\t{Drinks.drinksItemsList[i].drinksItemName}        |  {Drinks.drinksItemsList[i].drinksItemSize}  | {Drinks.drinksItemsList[i].drinksItemSizePrice} $");
                 }
                 
+            }
+        }
+        public void ShowDrinkssOrder()
+        {
+            if (MyDrinks.Count > 0)
+            {
+                Console.WriteLine($"Napoj Items: {MyDrinks.Count}           |                    |");
+
+                for (int i = 0; i < Drinks.drinksItemsList.Count; i++)
+                {
+                    Console.WriteLine($"\t{Drinks.drinksItemsList[i].drinksItemName}        |  {Drinks.drinksItemsList[i].drinksItemSize}  | {Drinks.drinksItemsList[i].drinksItemSizePrice} $");
+
+                   
+                }
+
             }
         }
 
@@ -162,33 +223,33 @@ namespace Restauracja_FasbiersPizza
                 }
                 if (choiceItem > 0 && choiceItem <= MenuItems.DrinksMenuItems.drinksMenuItemsList.Count)
                 {
-                    Console.WriteLine($"Choice of Extra: {MenuItems.DrinksMenuItems.drinksMenuItemsList[choiceItem - 1].itemName}\n");
-                    Console.WriteLine("Item Size: ");
+                    Console.WriteLine($"Wybierz: {MenuItems.DrinksMenuItems.drinksMenuItemsList[choiceItem - 1].itemName}\n");
+                    Console.WriteLine("Rozmiar: ");
                     MenuItems.CreateMenu(MenuItems.ItemSizes.itemSizesList);
                     while (!int.TryParse(Console.ReadLine(), out choiceSize))
                     {
                         Console.Clear();
-                        Console.WriteLine($"Choice of Extra: {MenuItems.DrinksMenuItems.drinksMenuItemsList[choiceItem - 1].itemName}\n");
+                        Console.WriteLine($"Wybież Napoj: {MenuItems.DrinksMenuItems.drinksMenuItemsList[choiceItem - 1].itemName}\n");
                         Console.WriteLine("Item Size: ");
                         MenuItems.CreateMenu(MenuItems.ItemSizes.itemSizesList);
 
                         while (choiceSize > MenuItems.ItemSizes.itemSizesList.Count)
                         {
-                            Console.WriteLine("\tNot a valid Size, please choose a valid option: ");
+                            Console.WriteLine("\tNie jest to prawidłowy rozmiar, proszę wybrać prawidłową opcję: ");
                             while (!int.TryParse(Console.ReadLine(), out choiceSize)) { }
                         }
                     }
 
                     if (choiceSize > 0 && choiceSize <= MenuItems.ItemSizes.itemSizesList.Count)
                     {
-                        Console.WriteLine($"Chosen Size: {MenuItems.ItemSizes.itemSizesList[choiceSize - 1].itemName}\n");
+                        Console.WriteLine($"Wybrany Rozmiar: {MenuItems.ItemSizes.itemSizesList[choiceSize - 1].itemName}\n");
                         order = Drinks.AddDrinksToDrinksListandDrinksOrder(drinks,order,choiceItem,choiceSize);
                     }
 
                 }
                 if (choiceItem > MenuItems.DrinksMenuItems.drinksMenuItemsList.Count || choiceSize > MenuItems.ItemSizes.itemSizesList.Count)
                 {
-                    Console.WriteLine("Not a valid option, Please Choose Again");
+                    Console.WriteLine("Nie jest to prawidłowa opcja, Wybierz ponownie");
                 }
             }
             return order;
@@ -228,6 +289,7 @@ namespace Restauracja_FasbiersPizza
 
                 foreach (BurgerKinds p in MyBurgers[i].burgerKindsList)
                 {
+
                     itemsTotal += p.KindsPrice;
 
                 }
@@ -253,6 +315,31 @@ namespace Restauracja_FasbiersPizza
             CheckTxt("------------------------------------------------------");
             return itemsTotal;
             
+
+        }
+
+        public void IdSearch()
+
+        {
+            string path = @"C:\Chekk.txt";
+            string IDs;
+            string r;
+            bool counter = false;
+            
+            System.IO.StreamReader file =
+             new System.IO.StreamReader(@"C:\checkk.txt");
+            string line;
+            while ((line = file.ReadLine()) != null)
+            {
+             
+                if (line.Contains(s))
+                {
+                    str = line;
+                    break;
+                }
+            }
+
+            file.Close();
 
         }
 
@@ -289,11 +376,11 @@ namespace Restauracja_FasbiersPizza
             }
             if (condition == true)
             {
-                Console.WriteLine(ID + " was found");
+                Console.WriteLine(ID + "ID jest znaleziony");
             }
             else
             {
-                Console.WriteLine(ID + " not found");
+                Console.WriteLine(ID + " ID nie jest znaleziony");
             }
             
         }
