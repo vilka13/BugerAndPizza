@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
@@ -8,16 +8,17 @@ namespace Restauracja_FasbiersPizza
     public class MenuItems
     {
         public MenuItems() { }
-
+    
         public static class MainMenuItems
         {
             public static List<(int index, string itemName, decimal price)> mainMenuItemsList = new List<(int index, string itemName, decimal price)>
             {
               (1, "Burgery",0m),
-              (2, "Pizzy  ",0m),
-              (3, "Napoj  ",0m),
+              (2, "Pizzy",0m),
+              (3, "Napoj",0m),
               (4, "Zloż zamowienie",0m),
-              (5, "ID search", 0m)
+              (5, "ID search", 0m),
+              (6, "Podaj co trzeba usunąć",0m),
             };
 
             
@@ -74,10 +75,10 @@ namespace Restauracja_FasbiersPizza
                             pizzaKindsMenuItemsList[kinds - 1].itemName,
                             pizzaKindsMenuItemsList[kinds - 1].price
                         );
-                        Console.WriteLine($"\tTopping chosen so far:");
+                        Console.WriteLine($"\tTopping wybrany do tej pory:");
                         if (pizza.pizzaKindsList.Count < 0)
                         {
-                            Console.WriteLine("\t* NONE *");
+                            Console.WriteLine("\t* NIE MA *");
                         }
                         foreach (PizzaKinds p in pizza.pizzaKindsList)
                         {
@@ -88,7 +89,7 @@ namespace Restauracja_FasbiersPizza
                     }
                     if (kinds > pizzaKindsMenuItemsList.Count)
                     {
-                        Console.WriteLine("\nNot a valid topping choice, Please choose again\n");
+                        Console.WriteLine("\nNie jest to prawidłowy wybór topping, proszę wybrać ponownie\n");
 
                         CreateMenu(pizzaKindsMenuItemsList);
                     }
@@ -99,30 +100,19 @@ namespace Restauracja_FasbiersPizza
         }
         public static class BurgerKindsMenuItems
         {   
-            public static List<(int index, string itemName,  decimal price)> burgerKindsMenuItemsList = new List<(int index, string itemName, decimal price)>
+            public static List<(int index, string itemName, decimal price)> burgerKindsMenuItemsList = new List<(int index, string itemName, decimal price)>
             {
-              (1, "Hamburger         ",3.99m),
-              (2, "Krabsburger       ",3.99m),
-              (3, "Cheesburger       ",3.99m),
-              (4, "Vegeburger        ",0.99m),
-              (5, "Drwala            ",0.99m),
-              (6, "Chikenburger      ",0.99m),
-              (7, "Big Mac           ",0.99m),
-              (8, "Chikker           ",0.99m),
-              (9, "McDouble          ",0.99m),
-              (10, "WiecMac          ",2.99m)
+              (1, "Kotlet: Wołowy ",3.99m),
+              (2, "Kotlet: Rostbef",3.99m),
+              (3, "Kotlet: Atrykot",3.99m),
+              (4, "Pomidor        ",0.99m),
+              (5, "Ogorek         ",0.99m),
+              (6, "Papryka        ",0.99m),
+              (7, "Cebula         ",0.99m),
+              (8, "Salat          ",0.99m),
+              (9, "Ser            ",0.99m),
+              (10, "Bekon         ",2.99m)
             };
-            public static class BurgerTopings
-            {
-                public static List<(int index, string itemName, decimal price)> itemSizesList = new List<(int index, string itemName, decimal price)>
-            {
-              (1, "Small    150 ml.",1.99m),
-              (2, "Medium   300 ml.",2.99m),
-              (3, "Large    500 ml.",3.99m),
-              (4, "X-large  700 ml.",4.99m)
-            };
-
-            }
 
             public static Burger ChooseBurgerKinds(int kinds, Burger burger)
             {
@@ -147,10 +137,10 @@ namespace Restauracja_FasbiersPizza
                             burgerKindsMenuItemsList[kinds - 1].itemName,
                             burgerKindsMenuItemsList[kinds - 1].price
                         );
-                        Console.WriteLine($"\tToppings chosen so far:");
+                        Console.WriteLine($"\tDodatki wybrane do tej pory:");
                         if (burger.burgerKindsList.Count < 0)
                         {
-                            Console.WriteLine("\t* NONE *");
+                            Console.WriteLine("\t* NIE MA *");
                         }
                         foreach (BurgerKinds b in burger.burgerKindsList)
                         {
@@ -161,7 +151,7 @@ namespace Restauracja_FasbiersPizza
                     }
                     if (kinds > burgerKindsMenuItemsList.Count)
                     {
-                        Console.WriteLine("\nNot a valid topping choice, Please choose again\n");
+                        Console.WriteLine("\nNie jest to prawidłowy wybór topping, proszę wybrać ponownie\n");
                         Console.WriteLine();
                         CreateMenu(burgerKindsMenuItemsList);
                     }
@@ -204,13 +194,15 @@ namespace Restauracja_FasbiersPizza
         {
             for (int i = 0; i < myList.Count; i++)
             {
-                if (myList[i].itemName.ToLower() == "extra" || myList[i].itemName.ToLower() == "checkout" || myList[i].itemName.ToLower() == "fries" || myList[i].itemName.ToLower() == "drink")
+                if (myList[i].itemName.ToLower() == "burgery" || myList[i].itemName.ToLower() == "pizzy" || myList[i].itemName.ToLower() == "napoj" 
+                    || myList[i].itemName.ToLower() == "drink" || myList[i].itemName.ToLower() == "zloż zamowienie" || myList[i].itemName.ToLower() == "id search"
+                    || myList[i].itemName.ToLower() == "podaj co trzeba usunąć")
                 {
                     Console.WriteLine($"[{myList[i].index}] {myList[i].itemName}");
                 }
-                else
+                else 
                 {
-                    Console.WriteLine($"[{myList[i].index}] {myList[i].itemName} - {myList[i].price} $");
+                    Console.WriteLine($"[{myList[i].index}] {myList[i].itemName} - {myList[i].price} zl");
                 }
 
 
