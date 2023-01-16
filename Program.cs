@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualBasic.FileIO;
+using Microsoft.VisualBasic.FileIO; //Potrzebne Biblioteki
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
@@ -10,32 +10,14 @@ using System.Text.RegularExpressions;
 using System.Xml.Serialization;
 
 
-namespace Restauracja_FasbiersPizza
+namespace Restauracja_FasbiersPizza //
 {
 
-    class Program
+    class Program //Dodawanie klasy
     {
-        //static void ReadTxt(string FileName)
-        //{
-        //    string line;
-        //    StreamReader sr = new StreamReader("C:/" + FileName + ".txt");  //можно зменить "C:/" - на папку, в которой будут находиться тхт-шники
-
-        //    line = sr.ReadLine();
-
-        //    while (line != null)
-        //    {
-
-        //        Console.WriteLine(line);
-
-        //        line = sr.ReadLine();
-        //    }
-
-        //    sr.Close();
-        //    Console.ReadLine();
-        //}
+ 
         
-        
-        static void Main(string[] args)
+        static void Main(string[] args) //funkcija Main 
             {
 
 
@@ -43,20 +25,20 @@ namespace Restauracja_FasbiersPizza
                 Order order = new Order();
 
 
-                decimal personMoney = 100m;
+                decimal personMoney = 100m;  //Dodawanie pieniędzy do użytkownika w formie przykładowej
                 bool payed = false;
 
                 int input = 1;
-                while (input != 0)
-                {
+                while (input != 0)         //Funkcja, która przetwarza dane użytkownika
+            {
                     Console.WriteLine("_____Zapraszamy do naszego resoranu_____");
                     Console.WriteLine("___________________MENU___________________");
-                    MenuItems.CreateMenu(MenuItems.MainMenuItems.mainMenuItemsList);
-                    Console.WriteLine("[0] Wyjż z Restauranu");
+                    MenuItems.CreateMenu(MenuItems.MainMenuItems.mainMenuItemsList); //Bierze list który jest w ItemList
+                Console.WriteLine("[0] Wyjż z Restauranu");
                     Console.Write("Wybież opcje: ");
 
-                    while (!int.TryParse(Console.ReadLine(), out input))
-                    {
+                    while (!int.TryParse(Console.ReadLine(), out input))  //Bierze list który jest w ItemList
+                {
                         Console.Clear();
                         Console.WriteLine("Wybież dania");
                         MenuItems.CreateMenu(MenuItems.MainMenuItems.mainMenuItemsList);
@@ -67,29 +49,41 @@ namespace Restauracja_FasbiersPizza
 
                     Console.WriteLine("");
 
-                switch (input)
+                switch (input)  //6 przypadków, które dodają i usuwają wybrane elementy do czeku
                 {
                     case 1:
 
                         Burger burger = new Burger();
                         int choice = 1;
                         order.BuildBurgerOrder(order, choice, burger);
+                        Console.Clear();
+                        order.ShowBurgersOrder();
+                        order.ShowPizzasOrder();
+                        order.ShowDrinkssOrder();
                         break;
                     case 2:
 
                         Pizza pizza = new Pizza();
                         choice = 1;
                         order.BuildPizzaOrder(order, choice, pizza);
+                        Console.Clear();
+                        order.ShowBurgersOrder();
+                        order.ShowPizzasOrder();
+                        order.ShowDrinkssOrder();
                         break;
                     case 3:
-                        //Extra Items
+                       
                         Drinks drinks = new Drinks();
                         int choiceItem = 1;
                         int choiceSize = 1;
                         order.BuildDrinksOrder(choiceItem, choiceSize, order, drinks);
+                        Console.Clear();
+                        order.ShowBurgersOrder();
+                        order.ShowPizzasOrder();
+                        order.ShowDrinkssOrder();
                         break;
-                    case 4:
-                        //Checkout
+                    case 4:    //Sumowanie zamówienia
+                      
                         Console.Clear();
                         order.TopCheck();
                         order.ShowBurgerOrder();
@@ -102,11 +96,55 @@ namespace Restauracja_FasbiersPizza
                         order.ClearAllOrdersAndList();
                         payed = true;
                         break;
-                    case 5:
-                        //Search ID
-                        Console.Clear();
-                        order.SearchID();
+                    case 5:  //Wyszukaj zamówienie według ID
 
+                        Console.Clear();
+                        order.loadFileAndSelectID();
+                        //order.SearchID();
+                        break;
+
+                    case 6:
+                        Console.WriteLine($"Podaj co\n1:Bubger\n2:Pizzy\n3:Napoj "); //Walizka, która usuwa niepotrzebne
+                        string f = Console.ReadLine();
+                        int u = Convert.ToInt32(f);
+                        
+                        if (u == 1)
+                        {
+                            Console.WriteLine("Usuwamy Burgery"); //usuwanie Burgerow
+                            string c = Console.ReadLine();
+                            int g = Convert.ToInt32(c)-1;
+                            order.MyBurgers.RemoveAt(g);
+                            order.ShowBurgersOrder();
+                            order.ShowPizzasOrder();
+                            order.ShowDrinkssOrder();
+
+                        }
+
+                        if (u == 2)
+                        {
+                            Console.WriteLine("Usuwamy Pizzy "); //usuwanie Pizze
+                            string c = Console.ReadLine();
+                            int g = Convert.ToInt32(c) - 1;
+                            order.MyPizzas.RemoveAt(g);
+                            order.ShowBurgersOrder();
+                            order.ShowPizzasOrder();
+                            order.ShowDrinkssOrder();
+                            
+                        }
+
+                        if (u == 3)
+                        {
+                            Console.WriteLine("Usuwamy Napoj"); //usuwanie Napojow
+                            string c = Console.ReadLine();
+                            int g = Convert.ToInt32(c) -1;
+                            Drinks.drinksItemsList.RemoveAt(g);
+                            order.ShowBurgersOrder();
+                            order.ShowPizzasOrder();
+                            order.ShowDrinkssOrder();
+                           
+                        }
+                        
+                        
                         break;
 
                     default:
@@ -120,7 +158,7 @@ namespace Restauracja_FasbiersPizza
                                 }
                                 if (oops == 'y' || oops == 'Y')
                                 {
-                                    Console.WriteLine("\nThank you for eating with us!!\n**** Here is your receipt ****\n");
+                                    Console.WriteLine("\nDziękujemy za wprowadzenie poprawki.!!\n**** Twój Paragon ****\n");
                                     order.ShowBurgerOrder();
                                     order.ShowPizzaOrder();
                                     order.ShowDrinksOrder();
@@ -137,15 +175,15 @@ namespace Restauracja_FasbiersPizza
                                 {
                                     input = 0;
                                     payed = false;
-                                    Console.WriteLine($"YOU LEFT WITHOUT PAYING " + "\nSHAME ON YOU!!!!!");
-                                    Console.WriteLine("\n\nPress Enter to Exit Program....");
+                                    Console.WriteLine($"HEJ,WYSZEDŁEŚ BEZ PŁACENIA " + "\nWSTYDŹ SIĘ!!!!!");
+                                    Console.WriteLine("\n\nNaciśnij Enter, aby wyjść z programu....");
                                     Console.ReadLine();
                                     continue;
                                 }
                             }
                             else
                             {
-                                Console.WriteLine("\n\nPress Enter to Exit Program....");
+                                Console.WriteLine("\n\nNaciśnij Enter, aby wyjść z programu....");
                                 Console.ReadLine();
                             }
                             break;
