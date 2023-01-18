@@ -1,18 +1,21 @@
-﻿using System;
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+
 namespace Restauracja_FasbiersPizza
 {
-    public class BurgerKinds
+    public class PizzaKinds
     {
         private string kindsName;
         private decimal kindsPrice;
 
-        //default constructor
-        public BurgerKinds()
+        
+        public PizzaKinds()
         {
         }
 
-        //overloaded constructor
-        public BurgerKinds(string kindsName, decimal kindsPrice)
+        
+        public PizzaKinds(string kindsName, decimal kindsPrice)
         {
             this.kindsName = kindsName;
             this.kindsPrice = kindsPrice;
@@ -22,3 +25,4 @@ namespace Restauracja_FasbiersPizza
         public decimal KindsPrice { get => kindsPrice; set => kindsPrice = value; }
     }
 }
+
