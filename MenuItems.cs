@@ -37,20 +37,20 @@ namespace Restauracja_FasbiersPizza
               (7, "Kielbasa Wiejska ",5.99m),
               (8, "Salami           ",5.99m),
               (9, "Krewetki         ",5.99m),
-              (10,"Cebula          ",1.99m),
-              (11,"Czosnek         ",1.99m),            
-              (12,"Brokuly         ",1.99m),
-              (13,"Papryka         ",2.99m),
-              (14,"Kukurydza       ",2.99m),
-              (15,"Pomidor         ",2.99m),
-              (16,"Pieczarki       ",2.99m),
-              (17,"Oliwki          ",3.99m),
-              (18,"Fasola          ",2.99m),
-              (19,"Ananas          ",3.99m),
-              (20,"Ogorek          ",2.99m),
-              (21,"Sos pomidorowy  ",1.99m),
-              (22,"Sos czosnkowy   ",1.99m),
-              (23,"Sos tzatziki    ",2.99m)
+              (10,"Cebula           ",1.99m),
+              (11,"Czosnek          ",1.99m),            
+              (12,"Brokuly          ",1.99m),
+              (13,"Papryka          ",2.99m),
+              (14,"Kukurydza        ",2.99m),
+              (15,"Pomidor          ",2.99m),
+              (16,"Pieczarki        ",2.99m),
+              (17,"Oliwki           ",3.99m),
+              (18,"Fasola           ",2.99m),
+              (19,"Ananas           ",3.99m),
+              (20,"Ogorek           ",2.99m),
+              (21,"Sos pomidorowy   ",1.99m),
+              (22,"Sos czosnkowy    ",1.99m),
+              (23,"Sos tzatziki     ",2.99m)
             };
 
             public static Pizza ChoosePizzaKinds(int kinds, Pizza pizza)
@@ -111,7 +111,7 @@ namespace Restauracja_FasbiersPizza
               (7, "Cebula         ",0.99m),
               (8, "Salat          ",0.99m),
               (9, "Ser            ",0.99m),
-              (10, "Bekon         ",2.99m)
+              (10,"Bekon          ",2.99m)
             };
 
             public static Burger ChooseBurgerKinds(int kinds, Burger burger)
